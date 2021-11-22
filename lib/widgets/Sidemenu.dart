@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:recipe/screens/contact.dart';
 import 'package:recipe/widgets/navitems.dart';
+import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 class SideMenu extends StatelessWidget {
   const SideMenu({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var url_support = 'https://www.buymeacoffee.com/bornakpaul';
     return Container(
       width: 200,
       height: double.infinity,
@@ -33,7 +35,17 @@ class SideMenu extends StatelessWidget {
                 height: 20,
               ),
               NavItem(
-                tapEvent: () {},
+                tapEvent: () async {
+                  if (await UrlLauncher.canLaunch(url_support)) {
+                    Navigator.pop(context);
+                    await UrlLauncher.launch(
+                      url_support,
+                      universalLinksOnly: true,
+                    );
+                  } else {
+                    throw 'There was a problem to open the url: $url_support';
+                  }
+                },
                 title: 'Support',
                 color: Colors.grey.shade800,
               ),
@@ -42,6 +54,7 @@ class SideMenu extends StatelessWidget {
               ),
               NavItem(
                 tapEvent: () {
+                  Navigator.pop(context);
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) => Contact()));
                 },
