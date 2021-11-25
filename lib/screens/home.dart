@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:recipe/model/recipe_model.dart';
@@ -75,11 +76,11 @@ class _HomeState extends State<Home> {
       ),
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Color(0xff764ff6),
+        backgroundColor: Color(0xff186ea8),
         elevation: 0.0,
         title: Text(
-          'Recipe Spinner',
-          style: TextStyle(fontSize: 22),
+          "InstantEats",
+          style: GoogleFonts.reenieBeanie(fontSize: 30),
         ),
       ),
       body: Stack(
@@ -90,8 +91,8 @@ class _HomeState extends State<Home> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  const Color(0xff764ff6),
-                  const Color(0xff5635c4),
+                  const Color(0xff186ea8),
+                  const Color(0xff0b6099),
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -110,7 +111,7 @@ class _HomeState extends State<Home> {
                     children: [
                       Expanded(
                         child: Material(
-                          color: const Color(0xff764ff6),
+                          color: Colors.white54,
                           elevation: 4,
                           borderRadius: BorderRadius.circular(50),
                           child: Container(
@@ -121,7 +122,7 @@ class _HomeState extends State<Home> {
                                     vertical: 10.0, horizontal: 15.0),
                                 hintText: 'Enter Ingredients',
                                 hintStyle: TextStyle(
-                                    fontSize: 18, color: Colors.white54),
+                                    fontSize: 18, color: Colors.black38),
                                 focusedBorder: OutlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.transparent)),
@@ -129,8 +130,8 @@ class _HomeState extends State<Home> {
                                     borderSide:
                                         BorderSide(color: Colors.transparent)),
                               ),
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.white),
+                              style: TextStyle(
+                                  fontSize: 18, color: Colors.black87),
                             ),
                           ),
                         ),
@@ -163,17 +164,18 @@ class _HomeState extends State<Home> {
                         },
                         child: Material(
                           elevation: 4,
+                          color: Colors.white54,
                           borderRadius: BorderRadius.circular(50),
                           child: Container(
                             height: 45,
                             width: 45,
                             decoration: BoxDecoration(
-                              color: const Color(0xff764ff6),
+                              //color: const Color(0xff1a72ad),
                               borderRadius: BorderRadius.circular(50),
                             ),
                             child: Icon(
                               Icons.search,
-                              color: Colors.white,
+                              color: Colors.black54,
                             ),
                           ),
                         ),

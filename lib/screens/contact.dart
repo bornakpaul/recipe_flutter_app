@@ -19,6 +19,8 @@ class Contact extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xff186ea8),
+          centerTitle: true,
           title: Text('Contact Us'),
           leading: IconButton(
             onPressed: () {

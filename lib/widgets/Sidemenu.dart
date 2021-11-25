@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:launch_review/launch_review.dart';
 import 'package:recipe/screens/contact.dart';
 import 'package:recipe/widgets/navitems.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
@@ -21,7 +22,7 @@ class SideMenu extends StatelessWidget {
             children: [
               Container(
                 height: 100,
-                color: Colors.deepPurpleAccent,
+                color: const Color(0xff0b6099),
               ),
               SizedBox(
                 height: 40,
@@ -29,7 +30,7 @@ class SideMenu extends StatelessWidget {
               NavItem(
                 tapEvent: () {},
                 title: 'About',
-                color: Colors.deepPurpleAccent,
+                color: const Color(0xff0b6099),
               ),
               SizedBox(
                 height: 20,
@@ -65,7 +66,9 @@ class SideMenu extends StatelessWidget {
                 height: 20,
               ),
               NavItem(
-                tapEvent: () {},
+                tapEvent: () {
+                  LaunchReview.launch(); //! will launch playstore
+                },
                 title: 'Rate Us',
                 color: Colors.grey.shade800,
               ),

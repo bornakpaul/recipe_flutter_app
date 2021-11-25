@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class Recipe extends StatefulWidget {
@@ -37,11 +38,11 @@ class _RecipeState extends State<Recipe> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: Color(0xff764ff6),
+          backgroundColor: Color(0xff186ea8),
           elevation: 0.0,
           title: Text(
-            'Recipe Spinner',
-            style: TextStyle(fontSize: 22),
+            "InstantEats",
+            style: GoogleFonts.reenieBeanie(fontSize: 30),
           ),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
