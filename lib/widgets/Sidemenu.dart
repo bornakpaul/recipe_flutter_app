@@ -22,8 +22,13 @@ class SideMenu extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 100,
                 color: const Color(0xff0b6099),
+                child: ClipRRect(
+                  child: Image.asset(
+                    "assets/images/InstantEats.png",
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
               SizedBox(
                 height: 40,
