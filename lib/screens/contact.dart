@@ -8,10 +8,9 @@ class Contact extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    final String phone = '+917337743323';
+    final String phone = '+918752901454';
     final String email = "bornakpaul@gmail.com";
-    final String text =
-        "Hi Bornak, I loved your work and i would like to support you!";
+    final String text = "Hey Bornak!!";
     var url_insta = 'https://www.instagram.com/born.tech/';
     var url_whatsapp = 'https://wa.me/${phone}?text=${text}';
     var url_call = 'tel://${phone}';
