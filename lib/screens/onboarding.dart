@@ -92,7 +92,10 @@ class _OnboardingState extends State<Onboarding> {
                       },
                       child: Text(
                         "NEXT",
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Color(0xff186ea8),
+                        ),
                       )),
                 ],
               ),
@@ -143,7 +146,11 @@ class SliderTile extends StatelessWidget {
           ),
           Text(
             title!,
-            style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
+            style: TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.w600,
+              color: Color(0xff186ea8),
+            ),
           ),
           SizedBox(
             height: 52,
