@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:recipe/screens/home.dart';
+import 'package:recipe/screens/onboarding.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+int? initScreen;
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  initScreen = await preferences.getInt('initScreen');
+  await preferences.setInt('initScreen', 1);
   runApp(const MyApp());
 }
 
@@ -15,9 +22,13 @@ class MyApp extends StatelessWidget {
       title: 'InstantEats',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.deepPurpleAccent,
+        primaryColor: Color(0xff186ea8),
       ),
-      home: const Home(),
+      initialRoute: initScreen == 0 || initScreen == null ? 'onboard' : 'home',
+      routes: {
+        'home': (context) => Home(),
+        'onboard': (context) => Onboarding(),
+      },
     );
   }
 }
