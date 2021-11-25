@@ -35,6 +35,18 @@ class SideMenu extends StatelessWidget {
                 height: 20,
               ),
               NavItem(
+                tapEvent: () {
+                  Navigator.pop(context);
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => Contact()));
+                },
+                title: 'Contact',
+                color: Colors.grey.shade800,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              NavItem(
                 tapEvent: () async {
                   if (await UrlLauncher.canLaunch(url_support)) {
                     Navigator.pop(context);
@@ -46,19 +58,7 @@ class SideMenu extends StatelessWidget {
                     throw 'There was a problem to open the url: $url_support';
                   }
                 },
-                title: 'Support',
-                color: Colors.grey.shade800,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              NavItem(
-                tapEvent: () {
-                  Navigator.pop(context);
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => Contact()));
-                },
-                title: 'Contact',
+                title: 'Contribute',
                 color: Colors.grey.shade800,
               ),
               SizedBox(

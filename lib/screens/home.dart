@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:recipe/model/recipe_model.dart';
@@ -40,7 +41,18 @@ class _HomeState extends State<Home> {
       loading = false;
       // print(recipeModel.url);
     });
-
+    //! If we dont have recipe for a item we will show this initial diet recipes.
+    if (recipes.isEmpty) {
+      Fluttertoast.showToast(
+          msg: "We don't have recipe for this item.",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.grey,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      getRecipes(initalRecipe);
+    }
     print("${recipes.toString()}");
   }
 
@@ -62,6 +74,7 @@ class _HomeState extends State<Home> {
         child: SideMenu(),
       ),
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Color(0xff764ff6),
         elevation: 0.0,
         title: Text(
@@ -91,44 +104,78 @@ class _HomeState extends State<Home> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  'Enter any ingredient to get the best recipe.',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
                 Container(
                   width: width,
                   child: Row(
                     children: [
                       Expanded(
-                        child: TextField(
-                          controller: textEditingController,
-                          decoration: InputDecoration(
-                            hintText: 'Enter Ingredients',
-                            hintStyle:
-                                TextStyle(fontSize: 18, color: Colors.white54),
+                        child: Material(
+                          color: const Color(0xff764ff6),
+                          elevation: 4,
+                          borderRadius: BorderRadius.circular(50),
+                          child: Container(
+                            child: TextField(
+                              controller: textEditingController,
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 15.0),
+                                hintText: 'Enter Ingredients',
+                                hintStyle: TextStyle(
+                                    fontSize: 18, color: Colors.white54),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.transparent)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.transparent)),
+                              ),
+                              style:
+                                  TextStyle(fontSize: 18, color: Colors.white),
+                            ),
                           ),
-                          style: TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),
                       SizedBox(
                         width: 16,
                       ),
-                      Container(
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.search,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
+                      InkWell(
+                        onTap: () {
+                          if (textEditingController.text.isEmpty) {
+                            Fluttertoast.showToast(
+                                msg: "Search cannot be empty",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.grey,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          } else {
                             loading = true;
                             recipes.clear();
                             setState(() {
                               getRecipes(textEditingController.text);
+                              textEditingController
+                                  .clear(); //! to clear the textfield
+                              FocusScope.of(context)
+                                  .unfocus(); //! to remove the on screen keyboard
                             });
-                          },
+                          }
+                        },
+                        child: Material(
+                          elevation: 4,
+                          borderRadius: BorderRadius.circular(50),
+                          child: Container(
+                            height: 45,
+                            width: 45,
+                            decoration: BoxDecoration(
+                              color: const Color(0xff764ff6),
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                            child: Icon(
+                              Icons.search,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -156,7 +203,7 @@ class _HomeState extends State<Home> {
                             gridDelegate:
                                 SliverGridDelegateWithMaxCrossAxisExtent(
                               maxCrossAxisExtent: 200,
-                              mainAxisSpacing: 10.0,
+                              mainAxisSpacing: 50.0,
                             ),
                             children: List.generate(recipes.length, (index) {
                               return GridTile(
@@ -221,23 +268,31 @@ class _RecipeTileState extends State<RecipeTile> {
         },
         child: Container(
           margin: EdgeInsets.all(8),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
           child: Stack(
             children: [
-              Image.network(
-                widget.imgUrl,
-                height: 200,
-                width: 200,
-                fit: BoxFit.cover,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: Image.network(
+                  widget.imgUrl,
+                  height: 200,
+                  width: 200,
+                  fit: BoxFit.cover,
+                ),
               ),
               Container(
                 width: 200,
                 alignment: Alignment.bottomLeft,
                 decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10.0),
+                      topRight: Radius.circular(10.0),
+                    ),
                     gradient: LinearGradient(
-                  colors: [Colors.white30, Colors.white],
-                  begin: FractionalOffset.centerRight,
-                  end: FractionalOffset.centerLeft,
-                )),
+                      colors: [Colors.white30, Colors.white],
+                      begin: FractionalOffset.centerRight,
+                      end: FractionalOffset.centerLeft,
+                    )),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(

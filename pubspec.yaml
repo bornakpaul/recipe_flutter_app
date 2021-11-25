@@ -32,6 +32,8 @@ dependencies:
     sdk: flutter
   http: ^0.13.3
   url_launcher: null
+  fluttertoast: ^8.0.7
+  webview_flutter: ^2.0.9
 
 dev_dependencies:
   flutter_lints: ^1.0.0
