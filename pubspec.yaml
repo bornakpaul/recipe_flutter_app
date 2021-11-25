@@ -34,9 +34,10 @@ dependencies:
   google_fonts: ^2.1.0
   http: ^0.13.3
   launch_review: ^3.0.1
+  rename: ^1.3.1
+  shared_preferences: ^2.0.6
   url_launcher: null
   webview_flutter: ^2.0.9
-  shared_preferences: ^2.0.6
 
 dev_dependencies:
   flutter_lints: ^1.0.0
@@ -74,7 +75,7 @@ flutter:
         - asset: assets/fonts/overpass-bold.otf
     - family: ReenieBeanie
       fonts:
-        - asset: assets/fonts/ReenieBeanie.ttf   
+        - asset: assets/fonts/ReenieBeanie.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

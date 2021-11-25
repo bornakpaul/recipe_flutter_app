@@ -24,7 +24,7 @@
         </intent>
   </queries>
    <application
-        android:label="recipe"
+        android:label="InstantEats"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
