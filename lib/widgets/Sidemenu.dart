@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:launch_review/launch_review.dart';
+import 'package:recipe/screens/about.dart';
 import 'package:recipe/screens/contact.dart';
 import 'package:recipe/widgets/navitems.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
@@ -28,7 +29,11 @@ class SideMenu extends StatelessWidget {
                 height: 40,
               ),
               NavItem(
-                tapEvent: () {},
+                tapEvent: () {
+                  Navigator.pop(context);
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => About()));
+                },
                 title: 'About',
                 color: const Color(0xff0b6099),
               ),

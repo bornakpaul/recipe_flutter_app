@@ -71,6 +71,9 @@ flutter:
     - family: OverpassBold
       fonts:
         - asset: assets/fonts/overpass-bold.otf
+    - family: ReenieBeanie
+      fonts:
+        - asset: assets/fonts/ReenieBeanie.ttf   
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

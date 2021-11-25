@@ -24,6 +24,7 @@ class NavItem extends StatelessWidget {
           style: TextStyle(
             color: color,
             fontSize: 18,
+            fontFamily: 'OverpassBold',
             fontWeight: FontWeight.w300,
           ),
         ),

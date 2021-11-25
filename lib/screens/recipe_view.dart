@@ -42,7 +42,7 @@ class _RecipeState extends State<Recipe> {
           elevation: 0.0,
           title: Text(
             "InstantEats",
-            style: GoogleFonts.reenieBeanie(fontSize: 30),
+            style: TextStyle(fontFamily: 'ReenieBeanie', fontSize: 32),
           ),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),

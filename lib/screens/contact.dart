@@ -21,7 +21,10 @@ class Contact extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Color(0xff186ea8),
           centerTitle: true,
-          title: Text('Contact Us'),
+          title: Text(
+            'Contact Us',
+            style: TextStyle(fontFamily: 'Overpass'),
+          ),
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -43,7 +46,7 @@ class Contact extends StatelessWidget {
                     children: [
                       Text(
                         'The developer can be contacted at: ',
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 20, fontFamily: 'Overpass'),
                       ),
                       SizedBox(
                         height: 20.0,
@@ -54,7 +57,7 @@ class Contact extends StatelessWidget {
                           Text(
                             'Address:',
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w600),
+                                fontSize: 18, fontFamily: 'OverpassBold'),
                           ),
                           SizedBox(
                             height: 10,
@@ -62,7 +65,9 @@ class Contact extends StatelessWidget {
                           Text(
                             'Bornak Paul, \nBMB School Road \nNear Play Boy\'s Sports Club, \nLumding, Assam, INDIA 782447.',
                             style: TextStyle(
-                                fontSize: 18, fontStyle: FontStyle.italic),
+                                fontSize: 18,
+                                fontStyle: FontStyle.italic,
+                                fontFamily: 'Overpass'),
                           ),
                         ],
                       ),
@@ -76,8 +81,8 @@ class Contact extends StatelessWidget {
                     children: [
                       Text(
                         'Direct Link: ',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w600),
+                        style:
+                            TextStyle(fontSize: 18, fontFamily: 'OverpassBold'),
                       ),
                       SizedBox(
                         height: 10,
@@ -174,7 +179,7 @@ class Contact extends StatelessWidget {
                   padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 10),
                   child: Text(
                     '\u00a9 BornTech | 2021 | All right reserved | Made in India',
-                    style: TextStyle(fontSize: 14),
+                    style: TextStyle(fontSize: 14, fontFamily: 'Overpass'),
                   ),
                 ),
               ],

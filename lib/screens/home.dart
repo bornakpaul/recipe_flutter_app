@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:recipe/model/recipe_model.dart';
@@ -80,7 +79,7 @@ class _HomeState extends State<Home> {
         elevation: 0.0,
         title: Text(
           "InstantEats",
-          style: GoogleFonts.reenieBeanie(fontSize: 30),
+          style: TextStyle(fontFamily: 'ReenieBeanie', fontSize: 32),
         ),
       ),
       body: Stack(
@@ -120,9 +119,11 @@ class _HomeState extends State<Home> {
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.symmetric(
                                     vertical: 10.0, horizontal: 15.0),
-                                hintText: 'Enter Ingredients',
+                                hintText: 'Enter any ingredient',
                                 hintStyle: TextStyle(
-                                    fontSize: 18, color: Colors.black38),
+                                    fontSize: 16,
+                                    color: Colors.white54,
+                                    fontFamily: 'Overpass'),
                                 focusedBorder: OutlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.transparent)),
@@ -131,7 +132,9 @@ class _HomeState extends State<Home> {
                                         BorderSide(color: Colors.transparent)),
                               ),
                               style: TextStyle(
-                                  fontSize: 18, color: Colors.black87),
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                  fontFamily: 'Overpass'),
                             ),
                           ),
                         ),
@@ -175,7 +178,7 @@ class _HomeState extends State<Home> {
                             ),
                             child: Icon(
                               Icons.search,
-                              color: Colors.black54,
+                              color: Colors.white,
                             ),
                           ),
                         ),
@@ -305,14 +308,15 @@ class _RecipeTileState extends State<RecipeTile> {
                         style: TextStyle(
                           fontSize: 13,
                           color: Colors.black54,
+                          fontFamily: 'Overpass',
                         ),
                       ),
                       Text(
                         widget.desc,
                         style: TextStyle(
-                          fontSize: 10,
-                          color: Colors.black54,
-                        ),
+                            fontSize: 10,
+                            color: Colors.black54,
+                            fontFamily: 'Overpass'),
                       ),
                     ],
                   ),
