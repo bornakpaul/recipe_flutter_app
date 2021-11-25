@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
@@ -68,165 +69,171 @@ class _HomeState extends State<Home> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
-    return Scaffold(
-      drawer: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: 300),
-        child: SideMenu(),
-      ),
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Color(0xff186ea8),
-        elevation: 0.0,
-        title: Text(
-          "InstantEats",
-          style: TextStyle(fontFamily: 'ReenieBeanie', fontSize: 32),
+    return WillPopScope(
+      onWillPop: () async {
+        SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+        return true;
+      },
+      child: Scaffold(
+        drawer: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: 300),
+          child: SideMenu(),
         ),
-      ),
-      body: Stack(
-        children: [
-          Container(
-            width: width,
-            height: height,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  const Color(0xff186ea8),
-                  const Color(0xff0b6099),
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Color(0xff186ea8),
+          elevation: 0.0,
+          title: Text(
+            "InstantEats",
+            style: TextStyle(fontFamily: 'ReenieBeanie', fontSize: 32),
+          ),
+        ),
+        body: Stack(
+          children: [
+            Container(
+              width: width,
+              height: height,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    const Color(0xff186ea8),
+                    const Color(0xff0b6099),
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
               ),
             ),
-          ),
-          Container(
-            width: width,
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  width: width,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Material(
-                          color: Colors.white54,
-                          elevation: 4,
-                          borderRadius: BorderRadius.circular(50),
-                          child: Container(
-                            child: TextField(
-                              controller: textEditingController,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.symmetric(
-                                    vertical: 10.0, horizontal: 15.0),
-                                hintText: 'Enter any ingredient',
-                                hintStyle: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white54,
-                                    fontFamily: 'Overpass'),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.transparent)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.transparent)),
-                              ),
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.white,
-                                  fontFamily: 'Overpass'),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          if (textEditingController.text.isEmpty) {
-                            Fluttertoast.showToast(
-                                msg: "Search cannot be empty",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.grey,
-                                textColor: Colors.white,
-                                fontSize: 16.0);
-                          } else {
-                            loading = true;
-                            recipes.clear();
-                            setState(() {
-                              getRecipes(textEditingController.text);
-                              textEditingController
-                                  .clear(); //! to clear the textfield
-                              FocusScope.of(context)
-                                  .unfocus(); //! to remove the on screen keyboard
-                            });
-                          }
-                        },
-                        child: Material(
-                          elevation: 4,
-                          color: Colors.white54,
-                          borderRadius: BorderRadius.circular(50),
-                          child: Container(
-                            height: 45,
-                            width: 45,
-                            decoration: BoxDecoration(
-                              //color: const Color(0xff1a72ad),
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: Icon(
-                              Icons.search,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Expanded(
-                  child: loading
-                      ? Center(
-                          child: Container(
-                            height: 30,
-                            width: 30,
-                            child: CircularProgressIndicator(
-                              color: Colors.white,
-                            ),
-                          ),
-                        )
-                      : Container(
-                          child: GridView(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            physics: ClampingScrollPhysics(),
-                            gridDelegate:
-                                SliverGridDelegateWithMaxCrossAxisExtent(
-                              maxCrossAxisExtent: 200,
-                              mainAxisSpacing: 50.0,
-                            ),
-                            children: List.generate(recipes.length, (index) {
-                              return GridTile(
-                                child: RecipeTile(
-                                  title: recipes[index].label!,
-                                  url: recipes[index].url!,
-                                  imgUrl: recipes[index].image!,
-                                  desc: recipes[index].source!,
+            Container(
+              width: width,
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: width,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Material(
+                            color: Colors.white54,
+                            elevation: 4,
+                            borderRadius: BorderRadius.circular(50),
+                            child: Container(
+                              child: TextField(
+                                controller: textEditingController,
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(
+                                      vertical: 10.0, horizontal: 15.0),
+                                  hintText: 'Enter any ingredient',
+                                  hintStyle: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.white54,
+                                      fontFamily: 'Overpass'),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.transparent)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.transparent)),
                                 ),
-                              );
-                            }),
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.white,
+                                    fontFamily: 'Overpass'),
+                              ),
+                            ),
                           ),
                         ),
-                ),
-              ],
-            ),
-          )
-        ],
+                        SizedBox(
+                          width: 16,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            if (textEditingController.text.isEmpty) {
+                              Fluttertoast.showToast(
+                                  msg: "Search cannot be empty",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.grey,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
+                            } else {
+                              loading = true;
+                              recipes.clear();
+                              setState(() {
+                                getRecipes(textEditingController.text);
+                                textEditingController
+                                    .clear(); //! to clear the textfield
+                                FocusScope.of(context)
+                                    .unfocus(); //! to remove the on screen keyboard
+                              });
+                            }
+                          },
+                          child: Material(
+                            elevation: 4,
+                            color: Colors.white54,
+                            borderRadius: BorderRadius.circular(50),
+                            child: Container(
+                              height: 45,
+                              width: 45,
+                              decoration: BoxDecoration(
+                                //color: const Color(0xff1a72ad),
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              child: Icon(
+                                Icons.search,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Expanded(
+                    child: loading
+                        ? Center(
+                            child: Container(
+                              height: 30,
+                              width: 30,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                        : Container(
+                            child: GridView(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              physics: ClampingScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithMaxCrossAxisExtent(
+                                maxCrossAxisExtent: 200,
+                                mainAxisSpacing: 50.0,
+                              ),
+                              children: List.generate(recipes.length, (index) {
+                                return GridTile(
+                                  child: RecipeTile(
+                                    title: recipes[index].label!,
+                                    url: recipes[index].url!,
+                                    imgUrl: recipes[index].image!,
+                                    desc: recipes[index].source!,
+                                  ),
+                                );
+                              }),
+                            ),
+                          ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
