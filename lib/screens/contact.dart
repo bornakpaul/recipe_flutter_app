@@ -12,6 +12,7 @@ class Contact extends StatelessWidget {
     final String email = "bornakpaul@gmail.com";
     final String text = "Hey Bornak!!";
     var url_insta = 'https://www.instagram.com/born.tech/';
+    var url_website = 'https://bornakpaul.in';
     var url_whatsapp = 'https://wa.me/${phone}?text=${text}';
     var url_call = 'tel://${phone}';
     var url_mail = 'mailto:$email}';
@@ -152,7 +153,23 @@ class Contact extends StatelessWidget {
                               image: AssetImage("assets/images/instagram.png"),
                               height: 40,
                             ),
-                          )
+                          ),
+                          Buttons(
+                            tapEvent: () async {
+                              if (await UrlLauncher.canLaunch(url_website)) {
+                                await UrlLauncher.launch(
+                                  url_website,
+                                  universalLinksOnly: true,
+                                );
+                              } else {
+                                throw 'There was a problem to open the url: $url_website';
+                              }
+                            },
+                            image: Image(
+                              image: AssetImage("assets/images/website.png"),
+                              height: 40,
+                            ),
+                          ),
                         ],
                       ),
                     ],

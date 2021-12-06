@@ -57,24 +57,7 @@ class SideMenu extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              NavItem(
-                tapEvent: () async {
-                  if (await UrlLauncher.canLaunch(url_support)) {
-                    Navigator.pop(context);
-                    await UrlLauncher.launch(
-                      url_support,
-                      universalLinksOnly: true,
-                    );
-                  } else {
-                    throw 'There was a problem to open the url: $url_support';
-                  }
-                },
-                title: 'Contribute',
-                color: Colors.grey.shade800,
-              ),
-              SizedBox(
-                height: 20,
-              ),
+              
               NavItem(
                 tapEvent: () {
                   LaunchReview.launch(); //! will launch playstore
