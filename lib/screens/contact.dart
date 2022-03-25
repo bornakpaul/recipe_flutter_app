@@ -15,7 +15,7 @@ class Contact extends StatelessWidget {
     var url_website = 'https://bornakpaul.in';
     var url_whatsapp = 'https://wa.me/${phone}?text=${text}';
     var url_call = 'tel://${phone}';
-    var url_mail = 'mailto:$email}';
+    var url_mail = 'mailto:${email}';
 
     return Scaffold(
         appBar: AppBar(

@@ -164,10 +164,8 @@ class _HomeState extends State<Home> {
                               recipes.clear();
                               setState(() {
                                 getRecipes(textEditingController.text);
-                                textEditingController
-                                    .clear(); //! to clear the textfield
-                                FocusScope.of(context)
-                                    .unfocus(); //! to remove the on screen keyboard
+                                textEditingController.clear();
+                                FocusScope.of(context).unfocus();
                               });
                             }
                           },
